@@ -1,23 +1,26 @@
 import * as Yup from 'yup';
+import { ContactStepValues, CredentialsStepValues } from './types';
 
 const REQUIRED_ERROR_TEXT = 'Required field';
 
 /** Credentials step validation schema */
-export const credentialValidationSchema = Yup.object({
-  email: Yup.string().email('Invalid email').required(REQUIRED_ERROR_TEXT),
-  password: Yup.string().required(REQUIRED_ERROR_TEXT),
-});
+export const credentialsValidationSchema: Yup.ObjectSchema<CredentialsStepValues> =
+  Yup.object({
+    email: Yup.string()
+      .defined()
+      .email('Invalid email')
+      .required(REQUIRED_ERROR_TEXT),
+    password: Yup.string().defined() /* 
+    .required(REQUIRED_ERROR_TEXT)
+    .min(8, 'Password must be at least 8 characters long')
+    .matches(/[0-9]/, 'Password requires at least one number')
+    .matches(/[^\w]/, 'Password requires at least one symbol') */,
+  });
 
 /** Contact information step validation schema */
-export const contactValidationSchema = Yup.object({
-  firstName: Yup.string().required(REQUIRED_ERROR_TEXT),
-  lastName: Yup.string().required(REQUIRED_ERROR_TEXT),
-});
-
-/** CredentialsFormData interface inferred from the validation schema */
-export interface CredentialsFormData
-  extends Yup.InferType<typeof credentialValidationSchema> {}
-
-/** ContactFormData interface inferred from the validation schema */
-export interface ContactFormData
-  extends Yup.InferType<typeof contactValidationSchema> {}
+export const contactValidationSchema: Yup.ObjectSchema<ContactStepValues> =
+  Yup.object({
+    firstName: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
+    lastName: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
+    birthDate: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
+  });

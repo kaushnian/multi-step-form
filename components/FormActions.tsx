@@ -2,28 +2,28 @@ import Button from '@mui/material/Button';
 import CardActions from '@mui/material/CardActions';
 
 type Props = {
-  onNext: () => void;
-  onPrevious: () => void;
+  showPrevious: boolean;
+  showSubmit: boolean;
+  onPrevious(): void;
 };
 
-export default function FormActions({ onPrevious, onNext }: Props) {
-  function handlePrevious() {
-    onPrevious();
-  }
-
-  function handleNext() {
-    onNext();
-  }
-
+/** Form actions component */
+export default function FormActions({
+  showPrevious,
+  showSubmit,
+  onPrevious,
+}: Props) {
   return (
     <CardActions sx={{ justifyContent: 'end', gap: 1 }}>
-      <Button variant="contained" onClick={handlePrevious}>
-        Previous
+      {showPrevious && (
+        <Button variant="contained" onClick={onPrevious}>
+          Previous
+        </Button>
+      )}
+
+      <Button variant="contained" type="submit">
+        {showSubmit ? 'Submit' : 'Next'}
       </Button>
-      <Button variant="contained" onClick={handleNext}>
-        Next
-      </Button>
-      <button type="submit">Submit</button>
     </CardActions>
   );
 }

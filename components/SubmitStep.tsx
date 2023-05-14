@@ -1,9 +1,4 @@
-import { useFormContext } from '@/context/form_context';
-
-/** Review and submit step component */
+/** Form review and submit, last step component */
 export default function SubmitStep() {
-  const { formData } = useFormContext();
-  console.log(formData);
-
-  return <></>;
+  return <>Submit step</>;
 }
