@@ -13,16 +13,26 @@ export type ContactStepValues = {
   lastName: string;
   birthDate: string;
   phone: string;
-  street?: string;
-  city?: string;
-  state?: string;
-  zip?: string;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+};
+
+/** Security step values */
+export type SecurityStepValues = {
+  question: string;
+  answer: string;
 };
 
 /** All values of the form */
-export type FormValues = CredentialsStepValues & ContactStepValues;
+export type FormValues = CredentialsStepValues &
+  ContactStepValues &
+  SecurityStepValues;
 
-/** Form step component props */
+/** Step component props */
 export type StepProps = {
-  validationSchema: ObjectSchema<CredentialsStepValues | ContactStepValues>;
+  validationSchema: ObjectSchema<
+    CredentialsStepValues | ContactStepValues | SecurityStepValues
+  >;
 };

@@ -1,5 +1,9 @@
 import * as Yup from 'yup';
-import { ContactStepValues, CredentialsStepValues } from './types';
+import {
+  ContactStepValues,
+  CredentialsStepValues,
+  SecurityStepValues,
+} from './types';
 
 const REQUIRED_ERROR_TEXT = 'Required field';
 
@@ -30,8 +34,15 @@ export const contactValidationSchema: Yup.ObjectSchema<ContactStepValues> =
     lastName: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
     birthDate: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
     phone: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
-    street: Yup.string().optional(),
-    city: Yup.string().optional(),
-    state: Yup.string().optional(),
-    zip: Yup.string().optional(),
+    street: Yup.string().default(''),
+    city: Yup.string().default(''),
+    state: Yup.string().default(''),
+    zip: Yup.string().default(''),
+  });
+
+/** Security step validation schema */
+export const securityValidationSchema: Yup.ObjectSchema<SecurityStepValues> =
+  Yup.object({
+    question: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
+    answer: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
   });

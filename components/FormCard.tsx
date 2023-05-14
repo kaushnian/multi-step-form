@@ -2,6 +2,7 @@ import { FormValues } from '@/shared/types';
 import {
   contactValidationSchema,
   credentialsValidationSchema,
+  securityValidationSchema,
 } from '@/shared/validation_schema';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -11,6 +12,7 @@ import CredentialsStep from './CredentialsStep';
 import MultiStepForm from './MultiStepForm';
 import ReviewStep from './ReviewStep';
 import { useState } from 'react';
+import SecurityStep from './SecurityStep';
 
 type Props = {
   onSuccess(): void;
@@ -42,6 +44,7 @@ export default function FormCard({ onSuccess }: Props) {
         <MultiStepForm onSubmit={handleSubmit} submitting={submitting}>
           <CredentialsStep validationSchema={credentialsValidationSchema} />
           <ContactStep validationSchema={contactValidationSchema} />
+          <SecurityStep validationSchema={securityValidationSchema} />
           <ReviewStep />
         </MultiStepForm>
       </CardContent>
