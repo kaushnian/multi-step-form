@@ -63,7 +63,7 @@ export default function MultiStepForm({ children, onSubmit }: Props) {
       onSubmit={handleSubmit}
     >
       <Form noValidate>
-        <Box minHeight={300}>{step}</Box>
+        <Box minHeight={420}>{step}</Box>
 
         <FormActions
           showPrevious={stepNumber > 0}

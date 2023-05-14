@@ -25,4 +25,8 @@ export const contactValidationSchema: Yup.ObjectSchema<ContactStepValues> =
     lastName: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
     birthDate: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
     phone: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
+    street: Yup.string().optional(),
+    city: Yup.string().optional(),
+    state: Yup.string().optional(),
+    zip: Yup.string().optional(),
   });

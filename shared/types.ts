@@ -12,6 +12,10 @@ export type ContactStepValues = {
   lastName: string;
   birthDate: string;
   phone: string;
+  street?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
 };
 
 /** All values of the form */

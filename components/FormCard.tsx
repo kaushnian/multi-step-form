@@ -35,7 +35,7 @@ export default function FormCard({ onSuccess }: Props) {
 
       <CardContent>
         <MultiStepForm onSubmit={handleSubmit}>
-          <CredentialsStep validationSchema={credentialsValidationSchema} />
+          {/* <CredentialsStep validationSchema={credentialsValidationSchema} /> */}
           <ContactStep validationSchema={contactValidationSchema} />
           <SubmitStep />
         </MultiStepForm>
