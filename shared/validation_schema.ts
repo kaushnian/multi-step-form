@@ -14,7 +14,8 @@ export const credentialsValidationSchema: Yup.ObjectSchema<CredentialsStepValues
       .defined()
       .required(REQUIRED_ERROR_TEXT)
       .min(8, 'Password must be at least 8 characters long')
-      .matches(/[0-9]/, 'Password requires at least one number')
+      .matches(/^\S*$/, 'Whitespace is not allowed')
+      .matches(/[0-9]/, 'Password requires at least one digit')
       .matches(/[a-zA-Z]/, 'Password requires at least one symbol'),
   });
 
