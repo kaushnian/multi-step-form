@@ -15,6 +15,7 @@ const INITIAL_VALUES: FormValues = {
   firstName: '',
   lastName: '',
   birthDate: '',
+  phone: '',
 };
 
 /**

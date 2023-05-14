@@ -11,6 +11,7 @@ export type ContactStepValues = {
   firstName: string;
   lastName: string;
   birthDate: string;
+  phone: string;
 };
 
 /** All values of the form */
