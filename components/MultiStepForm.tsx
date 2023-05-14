@@ -6,6 +6,7 @@ import FormActions from './FormActions';
 
 type Props = {
   children: ReactElement<StepProps>[];
+  submitting: boolean;
   onSubmit(values: FormValues): void;
 };
 
@@ -26,7 +27,11 @@ const INITIAL_VALUES: FormValues = {
  * current step are valid. Each step's validation schema is provided by the
  * current step component.
  */
-export default function MultiStepForm({ children, onSubmit }: Props) {
+export default function MultiStepForm({
+  children,
+  onSubmit,
+  submitting,
+}: Props) {
   const [stepNumber, setStepNumber] = useState(0);
 
   const steps = React.Children.toArray(children);
@@ -66,6 +71,7 @@ export default function MultiStepForm({ children, onSubmit }: Props) {
         <Box minHeight={420}>{step}</Box>
 
         <FormActions
+          submitting={submitting}
           showPrevious={stepNumber > 0}
           showSubmit={isFinalStep}
           onPrevious={() => handlePreviousClick()}

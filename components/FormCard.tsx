@@ -9,7 +9,8 @@ import CardHeader from '@mui/material/CardHeader';
 import ContactStep from './ContactStep';
 import CredentialsStep from './CredentialsStep';
 import MultiStepForm from './MultiStepForm';
-import SubmitStep from './SubmitStep';
+import ReviewStep from './ReviewStep';
+import { useState } from 'react';
 
 type Props = {
   onSuccess(): void;
@@ -17,15 +18,19 @@ type Props = {
 
 /** Form card component */
 export default function FormCard({ onSuccess }: Props) {
+  const [submitting, setSubmitting] = useState(false);
+
   const handleSubmit = async (values: FormValues) => {
+    setSubmitting(true);
+
     try {
       const response = await submit(values);
-
       if (response.status !== 200) throw await response.json();
-
       onSuccess();
     } catch (error) {
       // TODO: Handle errors
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -34,10 +39,10 @@ export default function FormCard({ onSuccess }: Props) {
       <CardHeader title="Form" />
 
       <CardContent>
-        <MultiStepForm onSubmit={handleSubmit}>
+        <MultiStepForm onSubmit={handleSubmit} submitting={submitting}>
           {/* <CredentialsStep validationSchema={credentialsValidationSchema} /> */}
           <ContactStep validationSchema={contactValidationSchema} />
-          <SubmitStep />
+          <ReviewStep />
         </MultiStepForm>
       </CardContent>
     </Card>

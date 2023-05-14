@@ -2,6 +2,7 @@ import Button from '@mui/material/Button';
 import CardActions from '@mui/material/CardActions';
 
 type Props = {
+  submitting: boolean;
   showPrevious: boolean;
   showSubmit: boolean;
   onPrevious(): void;
@@ -9,6 +10,7 @@ type Props = {
 
 /** Form actions component */
 export default function FormActions({
+  submitting,
   showPrevious,
   showSubmit,
   onPrevious,
@@ -21,7 +23,7 @@ export default function FormActions({
         </Button>
       )}
 
-      <Button variant="contained" type="submit">
+      <Button variant="contained" type="submit" disabled={submitting}>
         {showSubmit ? 'Submit' : 'Next'}
       </Button>
     </CardActions>
