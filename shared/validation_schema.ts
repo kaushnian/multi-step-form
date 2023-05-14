@@ -10,11 +10,12 @@ export const credentialsValidationSchema: Yup.ObjectSchema<CredentialsStepValues
       .defined()
       .email('Invalid email')
       .required(REQUIRED_ERROR_TEXT),
-    password: Yup.string().defined() /* 
-    .required(REQUIRED_ERROR_TEXT)
-    .min(8, 'Password must be at least 8 characters long')
-    .matches(/[0-9]/, 'Password requires at least one number')
-    .matches(/[^\w]/, 'Password requires at least one symbol') */,
+    password: Yup.string()
+      .defined()
+      .required(REQUIRED_ERROR_TEXT)
+      .min(8, 'Password must be at least 8 characters long')
+      .matches(/[0-9]/, 'Password requires at least one number')
+      .matches(/[a-zA-Z]/, 'Password requires at least one symbol'),
   });
 
 /** Contact information step validation schema */
