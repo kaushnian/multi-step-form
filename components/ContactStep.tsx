@@ -7,7 +7,7 @@ export default function ContactStep(_: StepProps) {
     <>
       <TextField label="First Name" name="firstName" required />
       <TextField label="Last Name" name="lastName" required />
-      <TextField label="Date of birth" name="birthDate" required />
+      <TextField label="Date of birth" type="date" name="birthDate" required />
     </>
   );
 }

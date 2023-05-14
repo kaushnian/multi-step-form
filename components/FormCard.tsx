@@ -1,3 +1,4 @@
+import { FormValues } from '@/shared/types';
 import {
   contactValidationSchema,
   credentialsValidationSchema,
@@ -10,14 +11,30 @@ import CredentialsStep from './CredentialsStep';
 import MultiStepForm from './MultiStepForm';
 import SubmitStep from './SubmitStep';
 
+type Props = {
+  onSuccess(): void;
+};
+
 /** Form card component */
-export default function FormCard() {
+export default function FormCard({ onSuccess }: Props) {
+  const handleSubmit = async (values: FormValues) => {
+    try {
+      const response = await submit(values);
+
+      if (response.status !== 200) throw await response.json();
+
+      onSuccess();
+    } catch (error) {
+      // TODO: Handle errors
+    }
+  };
+
   return (
     <Card>
       <CardHeader title="Form" />
 
       <CardContent>
-        <MultiStepForm>
+        <MultiStepForm onSubmit={handleSubmit}>
           <CredentialsStep validationSchema={credentialsValidationSchema} />
           <ContactStep validationSchema={contactValidationSchema} />
           <SubmitStep />
@@ -25,4 +42,12 @@ export default function FormCard() {
       </CardContent>
     </Card>
   );
+}
+
+async function submit(payload: FormValues) {
+  return fetch('https://httpstat.us/200', {
+    method: 'POST',
+    headers: { Accept: 'application/json' },
+    body: JSON.stringify(payload),
+  });
 }

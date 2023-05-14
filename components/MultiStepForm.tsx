@@ -6,6 +6,7 @@ import FormActions from './FormActions';
 
 type Props = {
   children: ReactElement<StepProps>[];
+  onSubmit(values: FormValues): void;
 };
 
 const INITIAL_VALUES: FormValues = {
@@ -24,7 +25,7 @@ const INITIAL_VALUES: FormValues = {
  * current step are valid. Each step's validation schema is provided by the
  * current step component.
  */
-export default function MultiStepForm({ children }: Props) {
+export default function MultiStepForm({ children, onSubmit }: Props) {
   const [stepNumber, setStepNumber] = useState(0);
 
   const steps = React.Children.toArray(children);
@@ -40,19 +41,19 @@ export default function MultiStepForm({ children }: Props) {
     if (stepNumber > 0) setStepNumber(step => step - 1);
   }
 
-  /** Called on each next step transition */
-  async function handleSubmit(
+  /** Handler called on each next step transition */
+  const handleSubmit = async (
     values: FormValues,
     { setTouched }: FormikHelpers<FormValues>
-  ) {
+  ) => {
     if (isFinalStep) {
-      console.log('Main form submit', values);
+      onSubmit(values);
     } else {
       setStepNumber(step => step + 1);
       // Set all fields untouched
       setTouched({});
     }
-  }
+  };
 
   return (
     <Formik
