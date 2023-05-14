@@ -7,6 +7,12 @@ export default function CredentialsStep(_: StepProps) {
     <>
       <TextField type="email" label="Email" name="email" required />
       <TextField type="password" label="Password" name="password" required />
+      <TextField
+        type="password"
+        label="Confirm Password"
+        name="passwordConfirmation"
+        required
+      />
     </>
   );
 }

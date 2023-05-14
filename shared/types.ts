@@ -4,6 +4,7 @@ import { ObjectSchema } from 'yup';
 export type CredentialsStepValues = {
   email: string;
   password: string;
+  passwordConfirmation: string;
 };
 
 /** Contact information step values */

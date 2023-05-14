@@ -17,6 +17,10 @@ export const credentialsValidationSchema: Yup.ObjectSchema<CredentialsStepValues
       .matches(/^\S*$/, 'Whitespace is not allowed')
       .matches(/[0-9]/, 'Password requires at least one digit')
       .matches(/[a-zA-Z]/, 'Password requires at least one symbol'),
+    passwordConfirmation: Yup.string()
+      .defined()
+      .required(REQUIRED_ERROR_TEXT)
+      .oneOf([Yup.ref('password')], 'Passwords must match'),
   });
 
 /** Contact information step validation schema */

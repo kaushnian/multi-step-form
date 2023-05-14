@@ -13,6 +13,7 @@ type Props = {
 const INITIAL_VALUES: FormValues = {
   email: '',
   password: '',
+  passwordConfirmation: '',
   firstName: '',
   lastName: '',
   birthDate: '',
