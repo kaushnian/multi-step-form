@@ -6,10 +6,10 @@ import Box from '@mui/material/Box';
 /** Text field component, wraps MUI TextField into Formik's Field */
 export default function TextField(props: FieldAttributes<{ label: string }>) {
   return (
-    <Box height={84}>
+    <Box height={76}>
       <Field
         component={(props: TextFieldProps) => (
-          <MuiTextField {...fieldToTextField(props)} />
+          <MuiTextField size="small" {...fieldToTextField(props)} />
         )}
         {...props}
       />

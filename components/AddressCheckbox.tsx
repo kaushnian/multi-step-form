@@ -10,7 +10,7 @@ type Props = {
 /** Address checkbox component */
 export default function AddressCheckbox({ checked, onChange }: Props) {
   return (
-    <FormGroup sx={{ height: 84 }}>
+    <FormGroup sx={{ height: 76 }}>
       <FormControlLabel
         control={
           <Checkbox

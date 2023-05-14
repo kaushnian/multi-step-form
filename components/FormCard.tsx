@@ -36,7 +36,7 @@ export default function FormCard({ onSuccess }: Props) {
 
   return (
     <Card>
-      <CardHeader title="Form" />
+      <CardHeader title="Create a new user account" />
 
       <CardContent>
         <MultiStepForm onSubmit={handleSubmit} submitting={submitting}>
