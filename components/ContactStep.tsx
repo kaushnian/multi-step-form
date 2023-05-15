@@ -1,16 +1,35 @@
-import { StepProps } from '@/shared/types';
+import { FormValues, StepProps } from '@/shared/types';
 import Grid from '@mui/material/Unstable_Grid2';
-import { useState } from 'react';
-import AddressCheckbox from './AddressCheckbox';
+import { useFormikContext } from 'formik';
+import { useEffect } from 'react';
+import Checkbox from './Checkbox';
 import TextField from './TextField';
+import Typography from '@mui/material/Typography';
+import StepTitle from './StepTitle';
 
 /** Contact information step component */
 export default function ContactStep(_: StepProps) {
-  const [showAddress, setShowAddress] = useState(false);
+  const { values, resetForm } = useFormikContext<FormValues>();
+
+  // Reset the address fields if the checkbox unset
+  useEffect(() => {
+    if (!values.hasAddress)
+      resetForm({
+        values: {
+          ...values,
+          street: '',
+          city: '',
+          state: '',
+          zip: '',
+        },
+      });
+  }, [values.hasAddress]);
 
   return (
-    <Grid container gap={1}>
+    <Grid container gap={3}>
       <Grid xs>
+        <StepTitle>Personal information</StepTitle>
+
         <TextField label="First Name" name="firstName" required />
         <TextField label="Last Name" name="lastName" required />
         <TextField
@@ -20,17 +39,19 @@ export default function ContactStep(_: StepProps) {
           required
         />
         <TextField label="Phone" type="tel" name="phone" required />
+
+        <Checkbox name="hasAddress" label="Include address" />
       </Grid>
 
       <Grid xs>
-        <AddressCheckbox checked={showAddress} onChange={setShowAddress} />
-
-        {showAddress && (
+        {values.hasAddress && (
           <>
-            <TextField label="Street" name="street" />
-            <TextField label="City" name="city" />
-            <TextField label="State" name="state" />
-            <TextField label="Zip" name="zip" />
+            <StepTitle>Address</StepTitle>
+
+            <TextField label="Street" name="street" required />
+            <TextField label="City" name="city" required />
+            <TextField label="State" name="state" required />
+            <TextField label="Zip" name="zip" required />
           </>
         )}
       </Grid>

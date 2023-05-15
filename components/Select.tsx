@@ -7,7 +7,7 @@ export default function Select(props: FieldAttributes<{ label: string }>) {
   return (
     <Box height={76}>
       <Field
-        formControl={{ sx: { width: 400 }, size: 'small' }}
+        formControl={{ fullWidth: true, size: 'small' }}
         component={FormikMuiSelect}
         {...props}
       >

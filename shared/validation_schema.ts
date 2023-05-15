@@ -5,44 +5,49 @@ import {
   SecurityStepValues,
 } from './types';
 
-const REQUIRED_ERROR_TEXT = 'Required field';
-
 /** Credentials step validation schema */
 export const credentialsValidationSchema: Yup.ObjectSchema<CredentialsStepValues> =
   Yup.object({
-    email: Yup.string()
-      .defined()
-      .email('Invalid email')
-      .required(REQUIRED_ERROR_TEXT),
-    password: Yup.string()
-      .defined()
-      .required(REQUIRED_ERROR_TEXT)
+    email: requiredStringSchema().email('Invalid email'),
+    password: requiredStringSchema()
       .min(8, 'Password must be at least 8 characters long')
       .matches(/^\S*$/, 'Whitespace is not allowed')
       .matches(/[0-9]/, 'Password requires at least one digit')
       .matches(/[a-zA-Z]/, 'Password requires at least one symbol'),
-    passwordConfirmation: Yup.string()
-      .defined()
-      .required(REQUIRED_ERROR_TEXT)
-      .oneOf([Yup.ref('password')], 'Passwords must match'),
+    passwordConfirmation: requiredStringSchema().oneOf(
+      [Yup.ref('password')],
+      'Passwords must match'
+    ),
   });
 
 /** Contact information step validation schema */
 export const contactValidationSchema: Yup.ObjectSchema<ContactStepValues> =
   Yup.object({
-    firstName: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
-    lastName: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
-    birthDate: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
-    phone: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
-    street: Yup.string().default(''),
-    city: Yup.string().default(''),
-    state: Yup.string().default(''),
-    zip: Yup.string().default(''),
+    firstName: requiredStringSchema(),
+    lastName: requiredStringSchema(),
+    birthDate: requiredStringSchema(),
+    phone: requiredStringSchema(),
+    hasAddress: Yup.bool().default(false),
+    street: addressSchema(),
+    city: addressSchema(),
+    state: addressSchema(),
+    zip: addressSchema(),
   });
 
 /** Security step validation schema */
 export const securityValidationSchema: Yup.ObjectSchema<SecurityStepValues> =
   Yup.object({
-    question: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
-    answer: Yup.string().defined().required(REQUIRED_ERROR_TEXT),
+    question: requiredStringSchema(),
+    answer: requiredStringSchema(),
   });
+
+function requiredStringSchema() {
+  return Yup.string().required('Required field');
+}
+
+/** Address fields become required when the hasAddress checkbox is set */
+function addressSchema() {
+  return Yup.string()
+    .default('')
+    .when('hasAddress', { is: true, then: () => requiredStringSchema() });
+}

@@ -13,6 +13,7 @@ export type ContactStepValues = {
   lastName: string;
   birthDate: string;
   phone: string;
+  hasAddress: boolean;
   street: string;
   city: string;
   state: string;

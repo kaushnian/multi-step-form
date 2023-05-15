@@ -6,7 +6,7 @@ import { TextField as FormikMuiTextField } from 'formik-mui';
 export default function TextField(props: FieldAttributes<{ label: string }>) {
   return (
     <Box height={76}>
-      <Field size="small" component={FormikMuiTextField} {...props} />
+      <Field size="small" fullWidth component={FormikMuiTextField} {...props} />
     </Box>
   );
 }

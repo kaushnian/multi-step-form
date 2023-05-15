@@ -5,7 +5,7 @@ import CardHeader from '@mui/material/CardHeader';
 export default function SuccessCard() {
   return (
     <Card>
-      <CardHeader title="The form is successfully submitted!" />
+      <CardHeader title="Congratulations! Your account has been created." />
     </Card>
   );
 }

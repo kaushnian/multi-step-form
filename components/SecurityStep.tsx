@@ -2,12 +2,14 @@ import { StepProps } from '@/shared/types';
 import MenuItem from '@mui/material/MenuItem';
 import Select from './Select';
 import TextField from './TextField';
+import StepTitle from './StepTitle';
 
 /** Security step component */
 export default function SecurityStep(_: StepProps) {
   return (
     <>
-      <Select label="Security question" name="question" required>
+      <StepTitle>Security question</StepTitle>
+      <Select label="Select question" name="question" required>
         <MenuItem value="question1">
           What is your mother's maiden name?
         </MenuItem>

@@ -18,6 +18,7 @@ const INITIAL_VALUES: FormValues = {
   lastName: '',
   birthDate: '',
   phone: '',
+  hasAddress: false,
   street: '',
   city: '',
   state: '',
