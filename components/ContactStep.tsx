@@ -3,15 +3,14 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { useFormikContext } from 'formik';
 import { useEffect } from 'react';
 import Checkbox from './Checkbox';
-import TextField from './TextField';
-import Typography from '@mui/material/Typography';
 import StepTitle from './StepTitle';
+import TextField from './TextField';
 
 /** Contact information step component */
 export default function ContactStep(_: StepProps) {
   const { values, resetForm } = useFormikContext<FormValues>();
 
-  // Reset the address fields if the checkbox unset
+  // Reset the address fields when the checkbox is unset
   useEffect(() => {
     if (!values.hasAddress)
       resetForm({
@@ -23,7 +22,7 @@ export default function ContactStep(_: StepProps) {
           zip: '',
         },
       });
-  }, [values.hasAddress]);
+  }, [values, resetForm]);
 
   return (
     <Grid container gap={3}>

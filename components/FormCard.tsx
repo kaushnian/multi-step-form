@@ -18,7 +18,12 @@ type Props = {
   onSuccess(): void;
 };
 
-/** Form card component */
+/**
+ * Form card component.
+ *
+ * Contains the multi-step form component that wraps the provided steps. Handles
+ * the submit request.
+ */
 export default function FormCard({ onSuccess }: Props) {
   const [submitting, setSubmitting] = useState(false);
 

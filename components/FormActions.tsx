@@ -8,7 +8,12 @@ type Props = {
   onPrevious(): void;
 };
 
-/** Form actions component */
+/**
+ * Form actions component.
+ *
+ * Conditionally renders Previous, Next, and Submit buttons. Disables the Submit
+ * button when the `submitting` prop is true.
+ */
 export default function FormActions({
   submitting,
   showPrevious,
@@ -17,13 +22,14 @@ export default function FormActions({
 }: Props) {
   return (
     <CardActions sx={{ justifyContent: 'end', gap: 1 }}>
-      {showPrevious && (
-        <Button variant="contained" onClick={onPrevious}>
-          Previous
-        </Button>
-      )}
+      {showPrevious && <Button onClick={onPrevious}>Previous</Button>}
 
-      <Button variant="contained" type="submit" disabled={submitting}>
+      <Button
+        variant="contained"
+        type="submit"
+        color={showSubmit ? 'success' : 'primary'}
+        disabled={submitting}
+      >
         {showSubmit ? 'Submit' : 'Next'}
       </Button>
     </CardActions>

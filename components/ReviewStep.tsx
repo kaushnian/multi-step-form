@@ -1,15 +1,14 @@
 import { FormValues } from '@/shared/types';
-import Typography from '@mui/material/Typography';
 import { useFormikContext } from 'formik';
+import StepTitle from './StepTitle';
 
-/** Form review and submit step component */
+/** Review and submit step component */
 export default function ReviewStep() {
   const { values } = useFormikContext<FormValues>();
+
   return (
     <>
-      <Typography variant="h6">
-        Please review the information you entered:
-      </Typography>
+      <StepTitle>Please review the information you entered:</StepTitle>
 
       <ul>
         {Object.entries(values).map(([key, value]) => (
